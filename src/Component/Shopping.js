@@ -25,15 +25,15 @@ export default class Shopping extends Component {
   }
 
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=870b1dd621824fb389fa72b26ad66d0b`;
+    let url = `https://api.thenewsapi.com/v1/news/top?api_token=WQn4yV5k2l1A3vitDQiXVNSEEns4uV9RQp5d8Bij&locale=us&limit=3`;
     this.setState({ loading: true });
     try {
       let data = await fetch(url);
       let parsedData = await data.json();
       console.log(parsedData);
       this.setState({
-        articles: parsedData.articles,
-        totalResults: parsedData.totalResults,
+        articles: parsedData.data,
+        totalResults: 5,
         loading: false,
       });
     } catch (error) {
@@ -63,7 +63,7 @@ export default class Shopping extends Component {
         Math.ceil(this.state.totalResults / this.props.pageSize)
       )
     ) {
-      let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=870b1dd621824fb389fa72b26ad66d0b`;
+      let url = `https://api.thenewsapi.com/v1/news/top?api_token=WQn4yV5k2l1A3vitDQiXVNSEEns4uV9RQp5d8Bij&locale=us&limit=3`;
       this.setState({ loading: true });
       let data = await fetch(url);
       let parsedData = await data.json();
@@ -93,7 +93,7 @@ export default class Shopping extends Component {
                         ? element.description.slice(0, 70)
                         : ""
                     }
-                    imageUrl={element.urlToImage}
+                    imageUrl={element.image_url}
                     newsUrl={element.url}
                   />
                 </div>
